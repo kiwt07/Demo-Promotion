@@ -1,0 +1,11 @@
+{
+  "name": "คุ้มก่อน",
+  "short_name": "คุ้มก่อน",
+  "description": "รวมโปรโมชั่นทุกหมวด จัดอันดับตามความคุ้มเป็นเงินบาท",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#F6F2EA",
+  "theme_color": "#5B3DF5",
+  "lang": "th",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

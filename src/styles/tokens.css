@@ -1,0 +1,70 @@
+:root {
+  --bg: #f6f2ea;
+  --surface: #ffffff;
+  --surface-2: #efe9de;
+  --ink: #17151c;
+  --ink-2: #5d5866;
+  --ink-3: #8f8a99;
+  --line: rgba(23, 21, 28, 0.09);
+  --brand: #5b3df5;
+  --brand-ink: #ffffff;
+  --brand-soft: rgba(91, 61, 245, 0.1);
+  --flash: #ff4a2b;
+  --flash-soft: rgba(255, 74, 43, 0.12);
+  --gold: #b97a00;
+  --gold-soft: rgba(217, 154, 0, 0.16);
+  --danger: #d43a2f;
+  --shadow: 0 1px 2px rgba(23, 21, 28, 0.04), 0 8px 24px -12px rgba(23, 21, 28, 0.18);
+  --shadow-lg: 0 24px 60px -20px rgba(23, 21, 28, 0.45);
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --font: 'IBM Plex Sans Thai', 'Noto Sans Thai', 'Sukhumvit Set', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --tabbar-h: 68px;
+
+  --c-shopping: #f2622e;
+  --c-bank: #2f6bff;
+  --c-fuel: #0f9d62;
+  --c-food: #e02d86;
+  --c-travel: #7a4df0;
+  --c-other: #c98a00;
+  --cat: var(--brand);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121116;
+    --surface: #1c1a22;
+    --surface-2: #26232e;
+    --ink: #f4f1fa;
+    --ink-2: #b4aec2;
+    --ink-3: #807a8e;
+    --line: rgba(255, 255, 255, 0.1);
+    --brand: #9a85ff;
+    --brand-ink: #14101f;
+    --brand-soft: rgba(154, 133, 255, 0.16);
+    --flash: #ff6a4d;
+    --flash-soft: rgba(255, 106, 77, 0.16);
+    --gold: #f0b93a;
+    --gold-soft: rgba(240, 185, 58, 0.16);
+    --danger: #ff7468;
+    --shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 10px 30px -16px rgba(0, 0, 0, 0.8);
+    --shadow-lg: 0 24px 60px -20px rgba(0, 0, 0, 0.9);
+
+    --c-shopping: #ff8757;
+    --c-bank: #6f9bff;
+    --c-fuel: #3ccf8e;
+    --c-food: #ff6bb0;
+    --c-travel: #a98bff;
+    --c-other: #f0b93a;
+    color-scheme: dark;
+  }
+}
+
+[data-cat='shopping'] { --cat: var(--c-shopping); }
+[data-cat='bank'] { --cat: var(--c-bank); }
+[data-cat='fuel'] { --cat: var(--c-fuel); }
+[data-cat='food'] { --cat: var(--c-food); }
+[data-cat='travel'] { --cat: var(--c-travel); }
+[data-cat='other'] { --cat: var(--c-other); }
