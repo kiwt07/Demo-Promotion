@@ -1,5 +1,8 @@
 import { fallbackColor, getBrand } from '../data/brands'
 
+/** โลโก้ทรงกลมที่ออกแบบมาให้เต็มช่อง ไม่ต้องเว้นขอบ */
+const FULL_BLEED = new Set(['kbank', 'scb', 'krungsri', 'uob'])
+
 interface Props {
   brand: string
   size?: number
@@ -15,7 +18,7 @@ export function BrandLogo({ brand, size = 44 }: Props) {
 
   return (
     <span
-      className={`logo${src?.includes('image/png') || src?.endsWith('.png') ? ' logo--full' : ''}`}
+      className={`logo${src && FULL_BLEED.has(b?.slug ?? '') ? ' logo--full' : ''}`}
       style={{ width: size, height: size, background: color, color: b?.fg ?? '#fff', fontSize, borderRadius: size * 0.28 }}
       aria-hidden="true"
     >

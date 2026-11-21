@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   base: './',
   // ฝังโลโก้ลงในไฟล์ JS เพื่อให้แอปเปิดได้จากไฟล์เดียว
-  build: { assetsInlineLimit: 40_000 },
+  build: { assetsInlineLimit: 90_000 },
   test: { environment: 'node' },
 })
