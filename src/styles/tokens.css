@@ -33,7 +33,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme='light']) {
     --bg: #121116;
     --surface: #1c1a22;
     --surface-2: #26232e;
@@ -60,6 +60,35 @@
     --c-other: #f0b93a;
     color-scheme: dark;
   }
+}
+
+/* ผู้ใช้เลือกโหมดมืดเอง (ค่าเดียวกับด้านบน) */
+:root[data-theme='dark'] {
+  --bg: #121116;
+  --surface: #1c1a22;
+  --surface-2: #26232e;
+  --ink: #f4f1fa;
+  --ink-2: #b4aec2;
+  --ink-3: #807a8e;
+  --line: rgba(255, 255, 255, 0.1);
+  --brand: #9a85ff;
+  --brand-ink: #14101f;
+  --brand-soft: rgba(154, 133, 255, 0.16);
+  --flash: #ff6a4d;
+  --flash-soft: rgba(255, 106, 77, 0.16);
+  --gold: #f0b93a;
+  --gold-soft: rgba(240, 185, 58, 0.16);
+  --danger: #ff7468;
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 10px 30px -16px rgba(0, 0, 0, 0.8);
+  --shadow-lg: 0 24px 60px -20px rgba(0, 0, 0, 0.9);
+
+  --c-shopping: #ff8757;
+  --c-bank: #6f9bff;
+  --c-fuel: #3ccf8e;
+  --c-food: #ff6bb0;
+  --c-travel: #a98bff;
+  --c-other: #f0b93a;
+  color-scheme: dark;
 }
 
 [data-cat='shopping'] { --cat: var(--c-shopping); }
