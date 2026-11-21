@@ -13,7 +13,10 @@ Prototype เว็บแอปแบบมือถือ (PWA) สำหรั
 
 ## โลโก้แบรนด์
 
-- แบรนด์ที่มีในชุด [Simple Icons](https://simpleicons.org) ใช้โลโก้จากชุดนั้น ส่วนแบรนด์อื่นแสดงตัวอักษรย่อบนสีแบรนด์
+- ธนาคาร (KBank, SCB, Krungsri, UOB): โลโก้สีเต็มจากแพ็กเกจ [thai-banks-logo](https://www.npmjs.com/package/thai-banks-logo) (ISC)
+- Shopee, TikTok, Shell, Grab, Starbucks, AirAsia, Klook: โลโก้จากชุด [Simple Icons](https://simpleicons.org) (CC0)
+- Lazada, Central, KTC, PTT, Bangchak, LINE MAN, Agoda, Watsons, Major, True: โลโก้ลายเส้นจากชุด [Arcticons](https://github.com/Arcticons-Team/Arcticons) (CC BY-SA 4.0) บนสีแบรนด์
+- MK และ PT ยังไม่มีในชุดใด จึงแสดงตัวอักษรย่อ
 - เพิ่มโลโก้เอง: วางไฟล์ใน `public/brands/` แล้วใส่ชื่อไฟล์ในช่อง `file` ของแบรนด์นั้นใน `src/data/brands.ts`
 - โลโก้และชื่อแบรนด์เป็นของเจ้าของแบรนด์ ก่อนเปิดใช้จริงต้องขอสิทธิ์ใช้ผ่านโปรแกรมพาร์ตเนอร์ของแต่ละแบรนด์
 
