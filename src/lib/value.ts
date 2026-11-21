@@ -79,3 +79,29 @@ export function benefitLabel(promo: Promo): string {
       return `+${fmt(b.points)} ${b.program}`
   }
 }
+
+/** เรียงจากประหยัดเงินมากไปน้อย: จำนวนเงินก่อน แล้วตามด้วย % */
+export function rankBySavings(promos: Promo[]): Promo[] {
+  return [...promos]
+    .map((p) => ({ p, v: computeValue(p) }))
+    .sort((a, b) => b.v.savingsBaht - a.v.savingsBaht || b.v.valuePct - a.v.valuePct)
+    .map((x) => x.p)
+}
+
+/** id ของโปรที่คุ้ม % สูงสุดในแต่ละหมวด */
+export function bestPerCategory(promos: Promo[]): Set<string> {
+  const best = new Map<string, { id: string; pct: number }>()
+  for (const p of promos) {
+    const pct = computeValue(p).valuePct
+    const cur = best.get(p.category)
+    if (!cur || pct > cur.pct) best.set(p.category, { id: p.id, pct })
+  }
+  return new Set([...best.values()].map((b) => b.id))
+}
+
+/** ประโยคภาษาคน: จ่ายเท่าไร ได้คืนเท่าไร */
+export function payLine(promo: Promo): string {
+  const v = computeValue(promo)
+  const back = `ได้คืน ฿${fmt(Math.round(v.savingsBaht))}`
+  return promo.minSpend > 0 ? `จ่าย ฿${fmt(v.basis)} ${back}` : `ทุก ฿${fmt(v.basis)} ${back}`
+}

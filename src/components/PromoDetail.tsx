@@ -1,9 +1,10 @@
 import { categoryName } from '../data/categories'
-import { benefitLabel, computeValue, fmt } from '../lib/value'
+import { benefitLabel, computeValue, fmt, payLine } from '../lib/value'
 import type { Promo } from '../types'
+import { BrandLogo } from './BrandLogo'
 import { Countdown } from './Countdown'
 import { Icon } from './Icon'
-import { Monogram, StatusBadge } from './PromoCard'
+import { StatusBadge } from './PromoCard'
 import { Sheet } from './Sheet'
 
 interface Props {
@@ -28,15 +29,38 @@ export function PromoDetail({ promo, saved, onClose, onToggleSave, onDelete, onT
     }
   }
 
-  const go = () => {
-    if (promo.url) window.open(promo.url, '_blank', 'noopener,noreferrer')
-    else onToast('ตัวอย่าง: แอปจริงจะพาไปหน้าโปรผ่านลิงก์พาร์ตเนอร์')
-  }
+  const how = [
+    promo.code ? `คัดลอกโค้ด ${promo.code}` : 'กดปุ่ม "ไปที่โปร" ด้านล่าง',
+    `เปิด ${promo.brand} แล้ว${promo.code ? 'ใส่โค้ดตอนชำระเงิน' : 'กดรับสิทธิ์'}`,
+    promo.minSpend > 0 ? `จ่ายครบ ฿${fmt(promo.minSpend)} ก่อนหมดเวลา` : 'จ่ายก่อนหมดเวลา ไม่มียอดขั้นต่ำ',
+  ]
+
+  const footer = (
+    <>
+      <div className="actions">
+        <button className={`btn btn--ghost${saved ? ' is-on' : ''}`} onClick={onToggleSave} aria-pressed={saved}>
+          <Icon name="bookmark" size={18} filled={saved} />
+          {saved ? 'บันทึกแล้ว' : 'บันทึก'}
+        </button>
+        {promo.url ? (
+          <a className="btn btn--primary" href={promo.url} target="_blank" rel="noopener noreferrer">
+            ไปที่โปร <Icon name="arrow" size={18} />
+          </a>
+        ) : (
+          <button className="btn btn--primary" onClick={() => onToast('ตัวอย่าง: แอปจริงจะพาไปหน้าโปรของแบรนด์')}>
+            ไปที่โปร <Icon name="arrow" size={18} />
+          </button>
+        )}
+      </div>
+      {promo.source !== 'user' && <p className="disclosure">ลิงก์นี้อาจเป็นลิงก์พาร์ตเนอร์ที่แอปได้รับค่าตอบแทน</p>}
+    </>
+  )
 
   return (
-    <Sheet title="รายละเอียดโปร" onClose={onClose} cat={promo.category}>
+    <Sheet title="รายละเอียดโปร" onClose={onClose} footer={footer}>
+      {promo.source === 'sample' && <p className="sample-note">ข้อมูลตัวอย่าง ไม่ใช่โปรโมชั่นจริงของแบรนด์</p>}
       <div className="detail__head">
-        <Monogram brand={promo.brand} />
+        <BrandLogo brand={promo.brand} size={52} />
         <div className="card__brand">
           <strong>{promo.brand}</strong>
           <span>{categoryName(promo.category)}</span>
@@ -44,11 +68,13 @@ export function PromoDetail({ promo, saved, onClose, onToggleSave, onDelete, onT
         <StatusBadge promo={promo} />
       </div>
       <h2 className="detail__title">{promo.title}</h2>
+      {promo.image && <img className="detail__img" src={promo.image} alt="" />}
 
       <div className="hero">
         <div>
-          <span className="hero__label">มูลค่าที่ได้คืน</span>
+          <span className="hero__label">คุณประหยัด</span>
           <div className="hero__baht">฿{fmt(Math.round(v.savingsBaht))}</div>
+          <span className="hero__pay">{payLine(promo)}</span>
         </div>
         <div className="hero__pct">
           <strong>{fmt(Math.round(v.valuePct))}%</strong>
@@ -74,10 +100,13 @@ export function PromoDetail({ promo, saved, onClose, onToggleSave, onDelete, onT
       )}
 
       <section className="block">
-        <h3>วิธีคิดความคุ้ม</h3>
-        <ol className="steps">
-          {v.steps.map((s, i) => (
-            <li key={i}>{s}</li>
+        <h3>วิธีใช้</h3>
+        <ol className="how">
+          {how.map((s, i) => (
+            <li key={i}>
+              <span>{i + 1}</span>
+              {s}
+            </li>
           ))}
         </ol>
       </section>
@@ -93,18 +122,15 @@ export function PromoDetail({ promo, saved, onClose, onToggleSave, onDelete, onT
         </section>
       )}
 
-      {promo.source === 'sample' && <p className="note">ข้อมูลตัวอย่างสำหรับ prototype ไม่ใช่โปรโมชั่นจริง</p>}
+      <details className="math">
+        <summary>ดูวิธีคิดความคุ้ม</summary>
+        <ol>
+          {v.steps.map((s, i) => (
+            <li key={i}>{s}</li>
+          ))}
+        </ol>
+      </details>
 
-      <div className="actions">
-        <button className={`btn btn--ghost${saved ? ' is-on' : ''}`} onClick={onToggleSave} aria-pressed={saved}>
-          <Icon name="bookmark" size={18} filled={saved} />
-          {saved ? 'บันทึกแล้ว' : 'บันทึก'}
-        </button>
-        <button className="btn btn--primary" onClick={go}>
-          ไปที่โปร <Icon name="arrow" size={18} />
-        </button>
-      </div>
-      {promo.source !== 'user' && <p className="disclosure">ลิงก์นี้อาจเป็นลิงก์พาร์ตเนอร์ที่แอปได้รับค่าตอบแทน</p>}
       {onDelete && (
         <button className="btn btn--danger" onClick={onDelete}>
           <Icon name="trash" size={16} /> ลบโปรนี้

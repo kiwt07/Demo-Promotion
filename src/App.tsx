@@ -1,13 +1,24 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { AddPromoForm } from './components/AddPromoForm'
+import { Onboarding } from './components/Onboarding'
 import { PromoDetail } from './components/PromoDetail'
 import { TabBar, type Tab } from './components/TabBar'
 import { buildSamplePromos } from './data/promos'
-import { loadMine, loadSaved, storeMine, storeSaved } from './lib/storage'
+import {
+  loadMine,
+  loadOnboarded,
+  loadOwned,
+  loadSaved,
+  storeMine,
+  storeOnboarded,
+  storeOwned,
+  storeSaved,
+} from './lib/storage'
 import { NowContext, useTicker } from './lib/time'
 import { Explore } from './screens/Explore'
 import { Feed } from './screens/Feed'
-import { Mine } from './screens/Mine'
+import { Me } from './screens/Me'
+import { Saved } from './screens/Saved'
 import type { Promo } from './types'
 
 export default function App() {
@@ -17,6 +28,8 @@ export default function App() {
   const [openId, setOpenId] = useState<string | null>(null)
   const [savedIds, setSavedIds] = useState<string[]>(loadSaved)
   const [mine, setMine] = useState<Promo[]>(loadMine)
+  const [ownedList, setOwnedList] = useState<string[]>(loadOwned)
+  const [intro, setIntro] = useState(() => !loadOnboarded())
   const [toast, setToast] = useState('')
 
   const samples = useMemo(() => buildSamplePromos(Date.now()), [])
@@ -29,6 +42,7 @@ export default function App() {
     [all, liveKey],
   )
   const saved = useMemo(() => new Set(savedIds), [savedIds])
+  const owned = useMemo(() => new Set(ownedList), [ownedList])
 
   useEffect(() => {
     storeSaved(savedIds)
@@ -36,6 +50,9 @@ export default function App() {
   useEffect(() => {
     storeMine(mine)
   }, [mine])
+  useEffect(() => {
+    storeOwned(ownedList)
+  }, [ownedList])
   useEffect(() => {
     if (!toast) return
     const id = setTimeout(() => setToast(''), 2200)
@@ -51,10 +68,13 @@ export default function App() {
     setToast(on ? 'นำออกจากที่บันทึกแล้ว' : 'บันทึกโปรแล้ว')
   }
 
+  const toggleOwned = (brand: string) =>
+    setOwnedList((list) => (list.includes(brand) ? list.filter((b) => b !== brand) : [...list, brand]))
+
   const addPromo = (p: Promo) => {
     setMine((m) => [p, ...m])
     setAdding(false)
-    setTab('mine')
+    setTab('me')
     setToast(p.visibility === 'pending' ? 'ส่งโปรเข้าคิวตรวจแล้ว' : 'เพิ่มโปรส่วนตัวแล้ว')
   }
 
@@ -65,27 +85,42 @@ export default function App() {
     setToast('ลบโปรแล้ว')
   }
 
+  const finishIntro = () => {
+    storeOnboarded(true)
+    setIntro(false)
+  }
+
   const closeDetail = useCallback(() => setOpenId(null), [])
   const closeAdd = useCallback(() => setAdding(false), [])
   const open = all.find((p) => p.id === openId)
-  const screenProps = { saved, onOpen: setOpenId, onToggleSave: toggleSave }
+  const common = { saved, owned, onOpen: setOpenId, onToggleSave: toggleSave }
 
   return (
     <NowContext.Provider value={now}>
       <div className="app">
         <main className="screen">
-          {tab === 'feed' && <Feed promos={live} {...screenProps} />}
-          {tab === 'explore' && <Explore promos={live} {...screenProps} />}
-          {tab === 'mine' && (
-            <Mine
-              savedPromos={live.filter((p) => saved.has(p.id))}
+          {tab === 'feed' && <Feed promos={live} onAdd={() => setAdding(true)} {...common} />}
+          {tab === 'explore' && <Explore promos={live} {...common} />}
+          {tab === 'saved' && (
+            <Saved
+              promos={live.filter((p) => saved.has(p.id))}
+              owned={owned}
+              onOpen={setOpenId}
+              onToggleSave={toggleSave}
+              onBrowse={() => setTab('feed')}
+            />
+          )}
+          {tab === 'me' && (
+            <Me
               mine={mine}
+              onToggleOwned={toggleOwned}
               onAdd={() => setAdding(true)}
-              {...screenProps}
+              onReplayIntro={() => setIntro(true)}
+              {...common}
             />
           )}
         </main>
-        <TabBar tab={tab} onTab={setTab} onAdd={() => setAdding(true)} />
+        <TabBar tab={tab} onTab={setTab} savedCount={savedIds.length} />
         {open && (
           <PromoDetail
             promo={open}
@@ -97,6 +132,7 @@ export default function App() {
           />
         )}
         {adding && <AddPromoForm onClose={closeAdd} onSubmit={addPromo} />}
+        {intro && <Onboarding owned={owned} onToggleOwned={toggleOwned} onDone={finishIntro} />}
         {toast && (
           <div className="toast" role="status">
             {toast}

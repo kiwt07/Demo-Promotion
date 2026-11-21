@@ -17,6 +17,10 @@ const PATHS: Record<string, string> = {
   copy: 'M9 9h10v11H9V9Zm-4 6V4h10',
   lock: 'M6 11h12v9H6v-9Zm2.5 0V8a3.5 3.5 0 0 1 7 0v3',
   globe: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM3 12h18M12 3c2.5 2.6 3.5 5.6 3.5 9s-1 6.4-3.5 9c-2.5-2.6-3.5-5.6-3.5-9s1-6.4 3.5-9Z',
+  user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-7.5 8.5a7.5 7.5 0 0 1 15 0',
+  check: 'm5 12.5 4.5 4.5L19 7.5',
+  image: 'M4 5h16v14H4V5Zm0 10 4.5-4.5 4 4 2.5-2.5 5 5M15.5 9.5h.01',
+  grid: 'M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z',
   trash: 'M5 7h14M9.5 7V4.5h5V7M7 7l1 13h8l1-13',
 }
 

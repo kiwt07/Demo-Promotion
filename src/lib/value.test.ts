@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { Benefit, Promo } from '../types'
-import { computeValue, rankByValue } from './value'
+import { bestPerCategory, computeValue, payLine, rankBySavings, rankByValue } from './value'
 
 const promo = (benefit: Benefit, minSpend = 0, id = 'x'): Promo => ({
   id,
@@ -70,5 +70,30 @@ describe('rankByValue', () => {
     const b = promo({ kind: 'baht', amount: 200 }, 1000, 'b') // 20%
     const c = promo({ kind: 'percent', pct: 10 }, 2000, 'c') // 10%, ฿200
     expect(rankByValue([a, b, c]).map((p) => p.id)).toEqual(['b', 'c', 'a'])
+  })
+})
+
+describe('rankBySavings', () => {
+  it('orders by baht saved, then by percent', () => {
+    const a = promo({ kind: 'percent', pct: 50 }, 100, 'a') // ฿50
+    const b = promo({ kind: 'baht', amount: 200 }, 4000, 'b') // ฿200, 5%
+    const c = promo({ kind: 'baht', amount: 200 }, 1000, 'c') // ฿200, 20%
+    expect(rankBySavings([a, b, c]).map((p) => p.id)).toEqual(['c', 'b', 'a'])
+  })
+})
+
+describe('bestPerCategory', () => {
+  it('picks the highest percent promo in each category', () => {
+    const a = { ...promo({ kind: 'percent', pct: 10 }, 500, 'a'), category: 'food' as const }
+    const b = { ...promo({ kind: 'percent', pct: 30 }, 500, 'b'), category: 'food' as const }
+    const c = { ...promo({ kind: 'percent', pct: 5 }, 500, 'c'), category: 'fuel' as const }
+    expect([...bestPerCategory([a, b, c])].sort()).toEqual(['b', 'c'])
+  })
+})
+
+describe('payLine', () => {
+  it('describes spend and return in plain words', () => {
+    expect(payLine(promo({ kind: 'baht', amount: 120 }, 600))).toBe('จ่าย ฿600 ได้คืน ฿120')
+    expect(payLine(promo({ kind: 'percent', pct: 5 }))).toBe('ทุก ฿1,000 ได้คืน ฿50')
   })
 })

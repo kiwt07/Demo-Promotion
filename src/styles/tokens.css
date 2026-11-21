@@ -1,49 +1,54 @@
+/* พื้นและกรอบเงียบ ให้โลโก้แบรนด์กับตัวเลขเป็นตัวเด่น
+   สีมีหน้าที่เดียว: --save = เงินที่ประหยัด, --flash = เวลาใกล้หมด, --brand = ปุ่มและแท็บของแอป */
 :root {
-  --bg: #f6f2ea;
+  --bg: #f5f5f8;
   --surface: #ffffff;
-  --surface-2: #efe9de;
-  --ink: #17151c;
-  --ink-2: #5d5866;
-  --ink-3: #8f8a99;
-  --line: rgba(23, 21, 28, 0.09);
+  --surface-2: #ececf2;
+  --ink: #16141d;
+  --ink-2: #5a5666;
+  --ink-3: #8c8899;
+  --line: rgba(22, 20, 29, 0.08);
   --brand: #5b3df5;
   --brand-ink: #ffffff;
   --brand-soft: rgba(91, 61, 245, 0.1);
-  --flash: #ff4a2b;
-  --flash-soft: rgba(255, 74, 43, 0.12);
-  --gold: #b97a00;
+  --save: #06864f;
+  --save-soft: rgba(6, 134, 79, 0.11);
+  --flash: #f0431f;
+  --flash-soft: rgba(240, 67, 31, 0.11);
+  --gold: #a26a00;
   --gold-soft: rgba(217, 154, 0, 0.16);
   --danger: #d43a2f;
-  --shadow: 0 1px 2px rgba(23, 21, 28, 0.04), 0 8px 24px -12px rgba(23, 21, 28, 0.18);
-  --shadow-lg: 0 24px 60px -20px rgba(23, 21, 28, 0.45);
-  --r-sm: 10px;
-  --r-md: 16px;
-  --r-lg: 22px;
-  --font: 'IBM Plex Sans Thai', 'Noto Sans Thai', 'Sukhumvit Set', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --tabbar-h: 68px;
-
+  --shadow: 0 1px 2px rgba(22, 20, 29, 0.04), 0 10px 26px -14px rgba(22, 20, 29, 0.2);
+  --shadow-lg: 0 24px 60px -20px rgba(22, 20, 29, 0.45);
   --c-shopping: #f2622e;
   --c-bank: #2f6bff;
   --c-fuel: #0f9d62;
   --c-food: #e02d86;
   --c-travel: #7a4df0;
   --c-other: #c98a00;
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --font: 'IBM Plex Sans Thai', 'Noto Sans Thai', 'Sukhumvit Set', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --tabbar-h: 64px;
   --cat: var(--brand);
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --bg: #121116;
-    --surface: #1c1a22;
-    --surface-2: #26232e;
-    --ink: #f4f1fa;
-    --ink-2: #b4aec2;
-    --ink-3: #807a8e;
+    --bg: #111015;
+    --surface: #1b1a22;
+    --surface-2: #27252f;
+    --ink: #f4f2fa;
+    --ink-2: #b5b0c2;
+    --ink-3: #827d90;
     --line: rgba(255, 255, 255, 0.1);
     --brand: #9a85ff;
     --brand-ink: #14101f;
     --brand-soft: rgba(154, 133, 255, 0.16);
+    --save: #3fdc97;
+    --save-soft: rgba(63, 220, 151, 0.14);
     --flash: #ff6a4d;
     --flash-soft: rgba(255, 106, 77, 0.16);
     --gold: #f0b93a;
@@ -51,7 +56,6 @@
     --danger: #ff7468;
     --shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 10px 30px -16px rgba(0, 0, 0, 0.8);
     --shadow-lg: 0 24px 60px -20px rgba(0, 0, 0, 0.9);
-
     --c-shopping: #ff8757;
     --c-bank: #6f9bff;
     --c-fuel: #3ccf8e;
@@ -64,16 +68,18 @@
 
 /* ผู้ใช้เลือกโหมดมืดเอง (ค่าเดียวกับด้านบน) */
 :root[data-theme='dark'] {
-  --bg: #121116;
-  --surface: #1c1a22;
-  --surface-2: #26232e;
-  --ink: #f4f1fa;
-  --ink-2: #b4aec2;
-  --ink-3: #807a8e;
+  --bg: #111015;
+  --surface: #1b1a22;
+  --surface-2: #27252f;
+  --ink: #f4f2fa;
+  --ink-2: #b5b0c2;
+  --ink-3: #827d90;
   --line: rgba(255, 255, 255, 0.1);
   --brand: #9a85ff;
   --brand-ink: #14101f;
   --brand-soft: rgba(154, 133, 255, 0.16);
+  --save: #3fdc97;
+  --save-soft: rgba(63, 220, 151, 0.14);
   --flash: #ff6a4d;
   --flash-soft: rgba(255, 106, 77, 0.16);
   --gold: #f0b93a;
@@ -81,7 +87,6 @@
   --danger: #ff7468;
   --shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 10px 30px -16px rgba(0, 0, 0, 0.8);
   --shadow-lg: 0 24px 60px -20px rgba(0, 0, 0, 0.9);
-
   --c-shopping: #ff8757;
   --c-bank: #6f9bff;
   --c-fuel: #3ccf8e;

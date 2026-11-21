@@ -19,6 +19,8 @@ export interface Promo {
   conditions: string[]
   code?: string
   url?: string
+  /** รูปที่ผู้ใช้แนบ (data URL ย่อขนาดแล้ว) */
+  image?: string
   sponsored?: boolean
   source: 'sample' | 'user'
   /** เฉพาะโปรที่ผู้ใช้เพิ่มเอง */
