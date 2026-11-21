@@ -15,7 +15,7 @@ export function BrandLogo({ brand, size = 44 }: Props) {
 
   return (
     <span
-      className="logo"
+      className={`logo${src?.includes('image/png') || src?.endsWith('.png') ? ' logo--full' : ''}`}
       style={{ width: size, height: size, background: color, color: b?.fg ?? '#fff', fontSize, borderRadius: size * 0.28 }}
       aria-hidden="true"
     >
