@@ -18,7 +18,8 @@ Prototype เว็บแอปแบบมือถือ (PWA) สำหรั
 - ไฟล์โลโก้ทางการจาก [Wikimedia Commons](https://commons.wikimedia.org): Lazada, TikTok, Central, KTC, PTT, Bangchak, PT, Grab, MK, Agoda, AirAsia, Major, True
 - Starbucks และ Shell: จากคลังรูปของ Wikipedia ภาษาอังกฤษ (โลโก้มีลิขสิทธิ์ ใช้เพื่อระบุแบรนด์)
 - ธนาคาร (KBank, SCB, Krungsri, UOB): จากแพ็กเกจ [thai-banks-logo](https://www.npmjs.com/package/thai-banks-logo)
-- แบรนด์ที่ยังไม่มีไฟล์ (Shopee, Klook, LINE MAN, Watsons) ใช้โลโก้สีเดียวจาก [Simple Icons](https://simpleicons.org) หรือลายเส้นจาก [Arcticons](https://github.com/Arcticons-Team/Arcticons) (CC BY-SA 4.0) และสุดท้ายคือตัวอักษรย่อ
+- Shopee จาก Wikimedia Commons และ Klook จากไอคอนบนเว็บทางการของ Klook
+- แบรนด์ที่ยังไม่มีไฟล์ทางการ (LINE MAN, Watsons) ใช้ลายเส้นจากชุด Arcticons; โค้ดยังรองรับโลโก้สีเดียวจาก [Simple Icons](https://simpleicons.org) หรือลายเส้นจาก [Arcticons](https://github.com/Arcticons-Team/Arcticons) (CC BY-SA 4.0) และสุดท้ายคือตัวอักษรย่อ
 - โลโก้และชื่อแบรนด์เป็นเครื่องหมายการค้าของเจ้าของแบรนด์ ก่อนเปิดใช้จริงต้องขอสิทธิ์ใช้ผ่านโปรแกรมพาร์ตเนอร์ของแต่ละแบรนด์
 
 ## ใช้งาน

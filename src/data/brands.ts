@@ -1,4 +1,4 @@
-import { siAirasia, siGrab, siKlook, siShell, siShopee, siStarbucks, siTiktok } from 'simple-icons'
+import { siAirasia, siGrab, siShell, siStarbucks, siTiktok } from 'simple-icons'
 import type { CategoryId } from '../types'
 import { OUTLINES } from './logoOutlines'
 
@@ -46,7 +46,7 @@ const b = (name: string, category: CategoryId, color: string, slug: string, extr
  * - แบรนด์ที่ไม่มีทั้งสามอย่างแสดงตัวอักษรย่อ จนกว่าจะวางไฟล์โลโก้ใน public/brands/ แล้วใส่ชื่อไฟล์ใน `file`
  */
 export const BRANDS: Brand[] = [
-  b('Shopee', 'shopping', `#${siShopee.hex}`, 'shopee', { icon: siShopee.path }),
+  b('Shopee', 'shopping', '#ee4d2d', 'shopee'),
   b('Lazada', 'shopping', '#0f146d', 'lazada', { outline: OUTLINES.lazada, short: 'Laz' }),
   b('TikTok Shop', 'shopping', '#000000', 'tiktok', { icon: siTiktok.path }),
   b('Central Online', 'shopping', '#d6001c', 'central', { outline: OUTLINES.central, short: 'C' }),
@@ -65,7 +65,7 @@ export const BRANDS: Brand[] = [
   b('MK', 'food', '#e2001a', 'mk', { short: 'MK' }),
   b('Agoda', 'travel', '#2f6fde', 'agoda', { outline: OUTLINES.agoda, short: 'agoda' }),
   b('AirAsia', 'travel', `#${siAirasia.hex}`, 'airasia', { icon: siAirasia.path }),
-  b('Klook', 'travel', `#${siKlook.hex}`, 'klook', { icon: siKlook.path }),
+  b('Klook', 'travel', '#ff5b00', 'klook'),
   b('Watsons', 'other', '#00a0a8', 'watsons', { outline: OUTLINES.watsons, short: 'W' }),
   b('Major', 'other', '#b8860b', 'major', { outline: OUTLINES.major, short: 'M' }),
   b('True', 'other', '#e4002b', 'true', { outline: OUTLINES.trueApp, short: 'true' }),
