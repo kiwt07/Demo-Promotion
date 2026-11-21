@@ -60,7 +60,7 @@ export const BRANDS: Brand[] = [
   b('Shell', 'fuel', `#${siShell.hex}`, 'shell', { fg: '#dd1d21', icon: siShell.path }),
   b('PT', 'fuel', '#00a651', 'pt', { short: 'PT' }),
   b('GrabFood', 'food', `#${siGrab.hex}`, 'grab', { icon: siGrab.path }),
-  b('LINE MAN', 'food', '#00b14f', 'lineman', { outline: OUTLINES.lineMan }),
+  b('LINE MAN', 'food', '#1fb46a', 'lineman'),
   b('Starbucks', 'food', `#${siStarbucks.hex}`, 'starbucks', { icon: siStarbucks.path }),
   b('MK', 'food', '#e2001a', 'mk', { short: 'MK' }),
   b('Agoda', 'travel', '#2f6fde', 'agoda', { outline: OUTLINES.agoda, short: 'agoda' }),

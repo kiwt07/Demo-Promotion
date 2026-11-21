@@ -1,7 +1,7 @@
 import { fallbackColor, getBrand } from '../data/brands'
 
 /** โลโก้ทรงกลมที่ออกแบบมาให้เต็มช่อง ไม่ต้องเว้นขอบ */
-const FULL_BLEED = new Set(['kbank', 'scb', 'krungsri', 'uob'])
+const FULL_BLEED = new Set(['kbank', 'scb', 'krungsri', 'uob', 'lineman'])
 
 interface Props {
   brand: string
